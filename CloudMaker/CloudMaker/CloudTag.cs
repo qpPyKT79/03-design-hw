@@ -12,15 +12,17 @@ namespace CloudMaker
         public Color TagColor { get; }
         public SizeF TagSize { get; }
         public float Frequency { get; }
+        public Point Location { get; }
 
         public string Word { get; }
 
-        public CloudTag(Color tagColor, SizeF size, float frequency, string word)
+        private CloudTag(Color tagColor, SizeF size, float frequency, string word, Point location)
         {
             TagColor = tagColor;
             TagSize = size;
             Frequency = frequency;
             Word = word;
+            Location = location;
         }
 
         public CloudTag(string word) 
@@ -28,11 +30,13 @@ namespace CloudMaker
             Word = word;
         }
 
-        public CloudTag SetColor(Color newColor) => new CloudTag(newColor, TagSize, Frequency, Word);
+        public CloudTag SetColor(Color newColor) => new CloudTag(newColor, TagSize, Frequency, Word, Location);
 
-        public CloudTag SetSize(SizeF newSize) => new CloudTag(TagColor, newSize, Frequency, Word);
+        public CloudTag SetSize(SizeF newSize) => new CloudTag(TagColor, newSize, Frequency, Word, Location);
 
-        public CloudTag SetFrequency(float newFrequency) => new CloudTag(TagColor, TagSize, newFrequency, Word);
+        public CloudTag SetFrequency(float newFrequency) => new CloudTag(TagColor, TagSize, newFrequency, Word, Location);
+
+        public CloudTag SetLocation(Point location) => new CloudTag(TagColor, TagSize, Frequency, Word, location);
 
 
         public int CompareTo(object obj)

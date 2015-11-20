@@ -9,6 +9,6 @@ namespace CloudMaker
 {
     interface ICloudMaker
     {
-        Image CreateCloud(IEnumerable<string> source, int minSize, int maxSize);
+        IEnumerable<CloudTag> CreateCloud(IEnumerable<string> source, int minSize, int maxSize);
     }
 }

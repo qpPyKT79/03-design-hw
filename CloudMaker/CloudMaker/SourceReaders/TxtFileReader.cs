@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace CloudMaker.Readers
 {
-    class TxtFileReader :ISourceReader
+    public class TxtFileReader :ISourceReader
     {
+        public TxtFileReader() { }
         public IEnumerable<string> ReadWords(string sourceName)
         {
             return File.Exists(sourceName) ? File.ReadAllText(sourceName).Split(' ', '\n').Where(word => !string.IsNullOrWhiteSpace(word)) : null;

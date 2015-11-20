@@ -7,12 +7,15 @@ using NHunspell;
 
 namespace CloudMaker.Filters
 {
-    class Normalizer: IFilter
+    public class Normalizer: IFilter
     {
+        public Normalizer()
+        {
+        }
+
         public IEnumerable<string> FilterWords(IEnumerable<string> words)
         {
             words.Select(Normalize);
-           
             return null;
         }
 

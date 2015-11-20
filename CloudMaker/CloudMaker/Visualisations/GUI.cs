@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CloudMaker.Visualisations
 {
-    class GUI : IVisulisation
+    public class GUI : IVisulisation
     {
+        public GUI() { }
     }
 }

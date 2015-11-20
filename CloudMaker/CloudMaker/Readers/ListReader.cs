@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace CloudMaker.Readers
 {
-    class ListReader : ITextReader
+    public class ListReader : ITextReader
     {
+        public ListReader() { }
         public IEnumerable<string> ReadWords(ISourceReader source, IFilter[] filters, string sourceName)
         {
             var text = source.ReadWords(sourceName);

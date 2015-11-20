@@ -8,11 +8,15 @@ using System.Threading.Tasks;
 
 namespace CloudMaker.CloudMaker
 {
-    class SimpleCloudMaker :ICloudMaker
+    public class SimpleCloudMaker :ICloudMaker
     {
         private Dictionary<string, float> Frequencies { get; set; }
 
-        private Image Image { get; set; }
+        public SimpleCloudMaker()
+        {
+            Frequencies = new Dictionary<string, float>();
+        }
+
         private IEnumerable<CloudTag> MakeCloudTags(IEnumerable<string> source)
         {
             foreach (var word in source)
@@ -29,28 +33,33 @@ namespace CloudMaker.CloudMaker
         }
         private IEnumerable<CloudTag> Scaling => Frequencies.Select(pair => new CloudTag(pair.Key).SetFrequency(pair.Value));
 
-        public Image CreateCloud(IEnumerable<string> source, int minSize = 1, int maxSize = 24)
+        public IEnumerable<CloudTag> CreateCloud(IEnumerable<string> source, int minSize = 1, int maxSize = 24)
         {
             var tags = MakeCloudTags(source).ToList();
-            SetSize(tags);
+            tags = SetSize(tags).ToList();
             tags.Sort();
-            var canvas  = new Mapper.Canvas();
-            foreach (var tag in tags)
+            return SetLocatons(tags);
+        }
+
+        private IEnumerable<CloudTag> SetLocatons(IEnumerable<CloudTag> tags)
+        {
+            var canvas = new Mapper.Canvas();
+            return tags.Select(tag =>
             {
                 var x = 0;
                 var y = 0;
                 var z = 0;
-                canvas.AddRectangle((int) tag.TagSize.Width, (int) tag.TagSize.Height, out x, out y, out z);
-                
-            }
-            return null;
+                canvas.AddRectangle((int)tag.TagSize.Width, (int)tag.TagSize.Height, out x, out y, out z);
+                return tag.SetLocation(new Point(x, y));
+            });
         }
 
-        private static void SetSize(IEnumerable<CloudTag> tags)
+        private static IEnumerable<CloudTag> SetSize(IEnumerable<CloudTag> tags)
         {
             using (Image tempImage = new Bitmap(1, 1))
             using (var g = Graphics.FromImage(tempImage))
-                tags.Select(tag => g.MeasureString(tag.Word, new Font(FontFamily.GenericSerif, tag.Frequency)));
+                return tags.Select(
+                    tag => tag.SetSize(g.MeasureString(tag.Word, new Font(FontFamily.GenericSerif, tag.Frequency))));
         }
     }
 }
