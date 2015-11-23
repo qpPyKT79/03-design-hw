@@ -67,12 +67,10 @@
     <Compile Include="Interfaces\ICloudMaker.cs" />
     <Compile Include="Interfaces\IFilter.cs" />
     <Compile Include="Interfaces\ISourceReader.cs" />
-    <Compile Include="Interfaces\ITextReader.cs" />
     <Compile Include="Interfaces\IVisulisation.cs" />
     <Compile Include="Interfaces\IWriter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Readers\ListReader.cs" />
     <Compile Include="SourceReaders\DocFileReader.cs" />
     <Compile Include="SourceReaders\TxtFileReader.cs" />
     <Compile Include="Visualisations\CUI.cs" />

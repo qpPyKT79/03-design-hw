@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CloudMaker
 {
-    interface IFilter
+    public interface IFilter
     {
         IEnumerable<string> FilterWords(IEnumerable<string> words);
 

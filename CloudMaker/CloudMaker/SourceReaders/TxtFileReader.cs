@@ -10,9 +10,11 @@ namespace CloudMaker.Readers
     public class TxtFileReader :ISourceReader
     {
         public TxtFileReader() { }
-        public IEnumerable<string> ReadWords(string sourceName)
+        public IEnumerable<string> ReadWords(string sourceName, IFilter[] filters)
         {
-            return File.Exists(sourceName) ? File.ReadAllText(sourceName).Split(' ', '\n').Where(word => !string.IsNullOrWhiteSpace(word)) : null;
+            var text = File.Exists(sourceName) ? File.ReadAllText(sourceName).Split(' ', '\n').Where(word => !string.IsNullOrWhiteSpace(word)) : null;
+            return text.Select(word => word.Replace("\r",""));
+            //return filters.Aggregate(text, (current, filter) => filter.FilterWords(current));
         }
     }
 }

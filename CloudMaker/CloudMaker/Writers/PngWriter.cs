@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -14,9 +15,20 @@ namespace CloudMaker.Writers
         {
             
         }
-        public void WriteTo(string outputSourceName)
+        public void WriteTo(IEnumerable<CloudTag> tags, string outputSourceName)
         {
-            throw new NotImplementedException();
+            using (var image = new Bitmap((int)tags.Sum(tag => tag.TagSize.Width), (int)tags.Sum(tag => tag.TagSize.Height)))
+            using (var g = Graphics.FromImage(image))
+            {
+                foreach (var tag in tags)
+                    g.DrawString(tag.Word, new Font("Times New Roman", tag.Frequency),new SolidBrush(GetRandomColor()), tag.X, tag.Y);
+                image.Save(outputSourceName, ImageFormat.Png);
+            }
+        }
+        private Color GetRandomColor()
+        {
+            var random = new Random();
+            return Color.FromArgb(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
         }
     }
 }

@@ -9,7 +9,7 @@ namespace CloudMaker.Readers
     public class DocFileReader : ISourceReader
     {
         // todo: документация по .doc формату на 500 страниц... может лучше сделать какой нибудь NetworkReader?
-        public IEnumerable<string> ReadWords(string sourceName)
+        public IEnumerable<string> ReadWords(string sourceName, IFilter[] filters)
         {
             throw new NotImplementedException();
         }

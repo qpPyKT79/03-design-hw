@@ -8,6 +8,6 @@ namespace CloudMaker
 {
     interface ISourceReader
     {
-        IEnumerable<string> ReadWords(string sourceName);
+        IEnumerable<string> ReadWords(string sourceName, IFilter[] filters);
     }
 }

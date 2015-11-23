@@ -15,6 +15,20 @@ namespace CloudMaker
 {
     class Program
     {
+        private ICloudMaker Maker { get; }
+        private IFilter[] Filters { get; }
+        private ISourceReader Reader { get; }
+        private IVisulisation UI { get; }
+        private IWriter Writer { get; }
+
+        public Program(ICloudMaker maker, IFilter[] filters, ISourceReader reader, IVisulisation ui, IWriter writer)
+        {
+            Maker = maker;
+            Filters = filters;
+            Reader = reader;
+            UI = ui;
+            Writer = writer;
+        }
         
         static void Main(string[] args)
         {
@@ -24,16 +38,22 @@ namespace CloudMaker
             kernel.Bind<IFilter>().To<BoringWords>();
             kernel.Bind<ISourceReader>().To<TxtFileReader>();
             kernel.Bind<ISourceReader>().To<DocFileReader>();
-            kernel.Bind<ITextReader>().To<ListReader>();
             kernel.Bind<IVisulisation>().To<CUI>();
             kernel.Bind<IVisulisation>().To<GUI>();
             kernel.Bind<IWriter>().To<PngWriter>();
             kernel.Bind<IWriter>().To<JpegWriter>();
+            new Program(kernel.Get<SimpleCloudMaker>(),
+                new [] {kernel.Get<Normalizer>()}, 
+                kernel.Get<TxtFileReader>(), 
+                kernel.Get<CUI>(), 
+                kernel.Get<PngWriter>() ).Run();
         }
 
         public void Run()
         {
-            
+            var text = Reader.ReadWords("in.txt", Filters);
+            var cloud = Maker.CreateCloud(text, 0, 0);
+            Writer.WriteTo(cloud, "out.png");
         }
     }
 }

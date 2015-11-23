@@ -8,7 +8,8 @@ namespace CloudMaker.Writers
 {
     class JpegWriter :IWriter
     {
-        public void WriteTo(string outputSourceName)
+
+        public void WriteTo(IEnumerable<CloudTag> tags, string outputSourceName)
         {
             throw new NotImplementedException();
         }

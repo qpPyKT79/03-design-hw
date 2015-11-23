@@ -8,6 +8,6 @@ namespace CloudMaker
 {
     interface IWriter
     {
-        void WriteTo(string outputSourceName);
+        void WriteTo(IEnumerable<CloudTag> tags, string outputSourceName);
     }
 }
