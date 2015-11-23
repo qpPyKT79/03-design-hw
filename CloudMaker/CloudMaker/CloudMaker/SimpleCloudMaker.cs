@@ -21,7 +21,7 @@ namespace CloudMaker.CloudMaker
         {
             return source.GroupBy(word => word)
                 .OrderByDescending(word => word.Count())
-                .Select(words => new CloudTag(words.First()).SetFrequency(1+(int)Math.Log(words.Count())));
+                .Select(words => new CloudTag(words.First()).SetFrequency(words.Count()));
             
         }
 
@@ -50,7 +50,7 @@ namespace CloudMaker.CloudMaker
         private static IEnumerable<CloudTag> SetLocatons(IEnumerable<CloudTag> tags)
         {
             var canvas = new Canvas();
-            var square = (int) tags.Sum(tag => tag.TagSize.Width)*(int) tags.Sum(tag => tag.TagSize.Height);
+            var square = (int) tags.Sum(tag => tag.TagSize.Width)*(int) tags.Sum(tag => tag.TagSize.Height)*100;
             canvas.SetCanvasDimensions(square,square);
             return tags.Select(tag => SetLocation(canvas, tag)).ToList();
         }
@@ -58,10 +58,10 @@ namespace CloudMaker.CloudMaker
         private static IEnumerable<CloudTag> SetSize(IEnumerable<CloudTag> tags)
         {
             var newTags = new List<CloudTag>();
-            using (Image tempImage = new Bitmap(100, 100))
+            using (Image tempImage = new Bitmap(100,100))
             using (var g = Graphics.FromImage(tempImage))
                 foreach (var tag in tags)
-                    newTags.Add(tag.SetSize(g.MeasureString(tag.Word, new Font("Times New Roman", tag.Frequency))));
+                    newTags.Add(tag.SetSize(g.MeasureString(tag.Word, new Font("Times New Roman", tag.Frequency*10))));
             return newTags;
                 //return tags.Select(
                 //    tag => tag.SetSize(g.MeasureString(tag.Word, new Font("Times New Roman", tag.Frequency))));

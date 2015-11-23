@@ -21,11 +21,15 @@ namespace CloudMaker.Writers
             using (var g = Graphics.FromImage(image))
             {
                 foreach (var tag in tags)
-                    g.DrawString(tag.Word, new Font("Times New Roman", tag.Frequency),new SolidBrush(GetRandomColor()), tag.X, tag.Y);
+                {
+                    var color = GetRandomColor();
+                    g.DrawString(tag.Word, new Font("Times New Roman", tag.Frequency*10),
+                        new SolidBrush(color), tag.X, tag.Y);
+                }
                 image.Save(outputSourceName, ImageFormat.Png);
             }
         }
-        private Color GetRandomColor()
+        private static Color GetRandomColor()
         {
             var random = new Random();
             return Color.FromArgb(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
