@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="CloudMaker\SimpleCloudMaker.cs" />
     <Compile Include="CloudTag.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Filters\BoringWords.cs" />
     <Compile Include="Filters\Normalizer.cs" />
     <Compile Include="Interfaces\ICloudMaker.cs" />
