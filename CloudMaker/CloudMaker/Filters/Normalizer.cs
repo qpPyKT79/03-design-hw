@@ -23,13 +23,6 @@ namespace CloudMaker.Filters
         {
             using (Hunspell hunspell = new Hunspell("en_us.aff", "en_us.dic"))
                 return hunspell.Stem(word).First();
-        }/*
-        var tag = new CloudTag("wat");
-        tag.SetFrequency(4);
-            SizeF a;
-            using (Image tempImage = new Bitmap(100, 100))
-            using (var g = Graphics.FromImage(tempImage))
-                a = g.MeasureString("wat", new Font("Times New Roman", 4));
-            Assert.AreEqual(a, null);*/
+        }
     }
 }

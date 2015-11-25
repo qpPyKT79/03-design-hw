@@ -17,7 +17,14 @@ namespace CloudMaker.Writers
         }
         public void WriteTo(IEnumerable<CloudTag> tags, string outputSourceName)
         {
-            using (var image = new Bitmap((int)tags.Sum(tag => tag.TagSize.Width), (int)tags.Sum(tag => tag.TagSize.Height)))
+            float width = 0;
+            float height = 0;
+            foreach (var tag in tags)
+            {
+                width += tag.TagSize.Width;
+                height += tag.TagSize.Height;
+            } 
+            using (var image = new Bitmap((int)width, (int)height))
             using (var g = Graphics.FromImage(image))
             {
                 foreach (var tag in tags)
