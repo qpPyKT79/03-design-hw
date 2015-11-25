@@ -10,15 +10,17 @@ namespace CloudMaker
 {
     public static class Extensions
     {
-        public static List<CloudTag> SetSize(this List<CloudTag> tags)
+        public static List<CloudTag> SetSize(this List<CloudTag> tags, int minSize, int maxSize)
         {
             var newTags = new List<CloudTag>();
             using (Image tempImage = new Bitmap(1, 1))
             using (var g = Graphics.FromImage(tempImage))
                 foreach (var tag in tags)
-                    newTags.Add(
-                        tag.SetSize(g.MeasureString(tag.Word,
-                            new Font("Times New Roman", ((float)(Math.Log(tag.Frequency, 2) + 1) * 10)))));
+                {
+                    var size = (float)(Math.Log(tag.Frequency, 2) + 1) * 10;
+                    newTags.Add(tag.SetSize(g.MeasureString(tag.Word,
+                        new Font("Times New Roman", (size > maxSize ? maxSize : (size < minSize ? minSize : size))))).SetFrequency(size));
+                }
             return newTags;
         }
 

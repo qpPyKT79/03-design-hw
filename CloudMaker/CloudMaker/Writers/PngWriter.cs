@@ -13,10 +13,11 @@ namespace CloudMaker.Writers
     {
         public PngWriter()
         {
-            
         }
-        public void WriteTo(IEnumerable<CloudTag> tags, string outputSourceName)
+
+        public void WriteTo(IEnumerable<CloudTag> tags, Color[] colors = null)
         {
+            string outputSourceName = "out.png";
             float width = 0;
             float height = 0;
             foreach (var tag in tags)
@@ -29,12 +30,16 @@ namespace CloudMaker.Writers
             using (var g = Graphics.FromImage(image))
             {
                 foreach (var tag in tags)
-                    g.DrawString(tag.Word, new Font("Times New Roman", ((float)(Math.Log(tag.Frequency, 2) +1) * 10)),
-                        new SolidBrush(GetRandomColor(random)), tag.X, tag.Y);
+                    g.DrawString(tag.Word, new Font("Times New Roman", tag.Frequency),
+                        new SolidBrush(GetRandomColor(random, colors)), tag.X, tag.Y);
                 image.Save(outputSourceName, ImageFormat.Png);
             }
         }
-        private static Color GetRandomColor(Random random)=> Color.FromArgb(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
         
+        private static Color GetRandomColor(Random random, Color[] colors) => 
+            colors == null ?
+            Color.FromArgb(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255)):
+            colors[random.Next()%colors.Length];
+
     }
 }

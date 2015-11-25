@@ -8,6 +8,7 @@ using CloudMaker.Filters;
 using CloudMaker.Readers;
 using CloudMaker.Visualisations;
 using CloudMaker.Writers;
+using System.Drawing;
 using NHunspell;
 using Ninject;
 
@@ -47,13 +48,21 @@ namespace CloudMaker
                 kernel.Get<TxtFileReader>(), 
                 kernel.Get<CUI>(), 
                 kernel.Get<PngWriter>() ).Run();
+
         }
 
         public void Run()
         {
-            var text = Reader.ReadWords("in.txt", Filters);
-            var cloud = Maker.CreateCloud(text, 0, 0);
-            Writer.WriteTo(cloud, "out.png");
+            //фильтры и конфигурация на аргументах ком строки
+            var inputFilename = string.Empty;
+            var minSize = 0;
+            var maxSize = 0;
+            Color[] colors;
+            UI.GetName(out inputFilename).GetSize(out minSize, out maxSize).GetColors(out colors);
+            var text = Reader.ReadWords(inputFilename, Filters);
+            var cloud = Maker.CreateCloud(text, minSize, maxSize);
+            Writer.WriteTo(cloud);
+            UI.AllDone();
         }
     }
 }
