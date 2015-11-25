@@ -23,23 +23,18 @@ namespace CloudMaker.Writers
             {
                 width += tag.TagSize.Width;
                 height += tag.TagSize.Height;
-            } 
+            }
+            var random = new Random();
             using (var image = new Bitmap((int)width, (int)height))
             using (var g = Graphics.FromImage(image))
             {
                 foreach (var tag in tags)
-                {
-                    var color = GetRandomColor();
-                    g.DrawString(tag.Word, new Font("Times New Roman", tag.Frequency*10),
-                        new SolidBrush(color), tag.X, tag.Y);
-                }
+                    g.DrawString(tag.Word, new Font("Times New Roman", ((float)(Math.Log(tag.Frequency, 2) +1) * 10)),
+                        new SolidBrush(GetRandomColor(random)), tag.X, tag.Y);
                 image.Save(outputSourceName, ImageFormat.Png);
             }
         }
-        private static Color GetRandomColor()
-        {
-            var random = new Random();
-            return Color.FromArgb(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
-        }
+        private static Color GetRandomColor(Random random)=> Color.FromArgb(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
+        
     }
 }

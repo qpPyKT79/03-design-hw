@@ -30,7 +30,7 @@ namespace CloudMaker.CloudMaker
             using (Image tempImage = new Bitmap(1, 1))
             using (var g = Graphics.FromImage(tempImage))
                 foreach (var tag in tags)
-                    newTags.Add(tag.SetSize(g.MeasureString(tag.Word, new Font("Times New Roman", tag.Frequency * 10))));
+                    newTags.Add(tag.SetSize(g.MeasureString(tag.Word, new Font("Times New Roman",((float)(Math.Log(tag.Frequency,2)+1)*10)))));
             return newTags;
         }
 
@@ -55,7 +55,7 @@ namespace CloudMaker.CloudMaker
             for (var i = 0; i < tags.Count; i++)
             {
                 Microsoft.Xna.Framework.Point placement;
-                packer.TryPack((int)tags[i].TagSize.Width + 1, (int)tags[i].TagSize.Height + 1, out placement);
+                packer.TryPack((int)tags[i].TagSize.Width, (int)tags[i].TagSize.Height, out placement);
                 tags[i] = tags[i].SetLocation(placement.X, placement.Y);
             }
             return tags;
