@@ -34,6 +34,8 @@ namespace CloudMaker
         static void Main(string[] args)
         {
             var kernel = new StandardKernel();
+            var options = new Options();
+            var commandLineArgs = CommandLine.Parser.Default.ParseArguments(args, options);
             kernel.Bind<ICloudMaker>().To<SimpleCloudMaker>();
             kernel.Bind<IFilter>().To<Normalizer>();
             kernel.Bind<IFilter>().To<BoringWords>();

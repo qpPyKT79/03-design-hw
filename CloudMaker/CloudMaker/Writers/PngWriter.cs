@@ -11,10 +11,6 @@ namespace CloudMaker.Writers
 {
     class PngWriter :IWriter
     {
-        public PngWriter()
-        {
-        }
-
         public void WriteTo(List<CloudTag> tags, Color[] colors = null)
         {
             string outputSourceName = "out.png";
@@ -35,6 +31,5 @@ namespace CloudMaker.Writers
             colors == null ?
             Color.FromArgb(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255)):
             colors[random.Next()%colors.Length];
-
     }
 }

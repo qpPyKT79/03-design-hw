@@ -9,7 +9,6 @@ namespace CloudMaker.Visualisations
 {
     public class GUI : IVisulisation
     {
-        public GUI() { }
         public IVisulisation GetName(out string sourceName)
         {
             throw new NotImplementedException();

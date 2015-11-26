@@ -9,17 +9,9 @@ namespace CloudMaker.Filters
 {
     public class Normalizer: IFilter
     {
-        public Normalizer()
-        {
-        }
+        public IEnumerable<string> FilterWords(IEnumerable<string> words) => words.Select(Normalize);
 
-        public IEnumerable<string> FilterWords(IEnumerable<string> words)
-        {
-            words.Select(Normalize);
-            return null;
-        }
-
-        protected string Normalize(string word)
+        private string Normalize(string word)
         {
             using (Hunspell hunspell = new Hunspell("en_us.aff", "en_us.dic"))
                 return hunspell.Stem(word).First();

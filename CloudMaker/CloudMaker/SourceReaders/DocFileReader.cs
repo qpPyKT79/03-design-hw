@@ -13,6 +13,5 @@ namespace CloudMaker.Readers
         {
             throw new NotImplementedException();
         }
-        public DocFileReader() { }
     }
 }

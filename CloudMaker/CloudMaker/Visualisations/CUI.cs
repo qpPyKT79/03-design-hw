@@ -9,8 +9,6 @@ namespace CloudMaker.Visualisations
 {
     public class CUI : IVisulisation
     {
-        public CUI() { }
-
         public IVisulisation GetName(out string sourceName)
         {
             Console.WriteLine("Plese type Filename");
