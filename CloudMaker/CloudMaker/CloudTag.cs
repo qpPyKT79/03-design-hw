@@ -36,6 +36,11 @@ namespace CloudMaker
         
         public CloudTag SetLocation(float x, float y) => new CloudTag(TagSize, Frequency, Word, x,y);
 
+        public override bool Equals(object obj)
+        {
+
+            return base.Equals(obj);
+        }
 
         public int CompareTo(object obj)
         {
