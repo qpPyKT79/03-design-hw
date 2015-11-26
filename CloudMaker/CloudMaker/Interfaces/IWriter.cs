@@ -9,6 +9,6 @@ namespace CloudMaker
 {
     interface IWriter
     {
-        void WriteTo(IEnumerable<CloudTag> tags, Color[] colors = null);
+        void WriteTo(List<CloudTag> tags, Color[] colors = null);
     }
 }

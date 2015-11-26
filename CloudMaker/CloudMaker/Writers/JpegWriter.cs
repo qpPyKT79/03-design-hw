@@ -10,7 +10,7 @@ namespace CloudMaker.Writers
     class JpegWriter :IWriter
     {
 
-        public void WriteTo(IEnumerable<CloudTag> tags, Color[] colors = null)
+        public void WriteTo(List<CloudTag> tags, Color[] colors = null)
         {
             throw new NotImplementedException();
         }

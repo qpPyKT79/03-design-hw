@@ -15,18 +15,13 @@ namespace CloudMaker.Writers
         {
         }
 
-        public void WriteTo(IEnumerable<CloudTag> tags, Color[] colors = null)
+        public void WriteTo(List<CloudTag> tags, Color[] colors = null)
         {
             string outputSourceName = "out.png";
-            float width = 0;
-            float height = 0;
-            foreach (var tag in tags)
-            {
-                width += tag.TagSize.Width;
-                height += tag.TagSize.Height;
-            }
+            float maxWidth = tags.Max(tag => tag.TagSize.Width);
+            maxWidth = ((float)Math.Log(tags.Count, 2) + 1) * maxWidth;
             var random = new Random();
-            using (var image = new Bitmap((int)width, (int)height))
+            using (var image = new Bitmap((int)maxWidth+1, (int)maxWidth+1))
             using (var g = Graphics.FromImage(image))
             {
                 foreach (var tag in tags)
