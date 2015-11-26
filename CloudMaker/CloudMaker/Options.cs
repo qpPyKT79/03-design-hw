@@ -15,7 +15,7 @@ namespace CloudMaker
     {
         public static readonly Dictionary<string, Type> description = new Dictionary<string, Type>
         {
-            {"txt", typeof(ListFileReader) },
+            {"list", typeof(ListFileReader) },
             {"CUI", typeof (CUI)},
             {"GUI", typeof (GUI)},
             {"png", typeof (PngWriter)},
@@ -31,7 +31,7 @@ namespace CloudMaker
         public MainArgs(string[] args)
         {
             if (args.Length<3) errorPrint();
-            InputFileType = description[args[0].Substring(args[0].IndexOf('.')+1)];
+            InputFileType = description[args[0]];
             Visualisation = description[args[1]];
             OutputFileType = description[args[2]];
             Filters = new List<Type>();
