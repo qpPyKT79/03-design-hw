@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using CloudMaker;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using nunit.framework;
 
 namespace Tests
 {

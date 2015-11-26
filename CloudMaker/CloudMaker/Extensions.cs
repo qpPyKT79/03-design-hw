@@ -17,20 +17,29 @@ namespace CloudMaker
             using (Image tempImage = new Bitmap(1, 1))
             using (var g = Graphics.FromImage(tempImage))
                 foreach (var tag in tags)
-                {
-                    var size = (float)(Math.Log(tag.Frequency, 2) + 1);
-                    size = size > maxSize ? maxSize : (size < minSize ? minSize : size);
-                    size *= 10;
-                    newTags.Add(tag.SetSize(g.MeasureString(tag.Word,
-                        new Font("Times New Roman", size))).SetFrequency(size));
-                }
+                    newTags.Add(SetSize(tag, g, minSize, maxSize));
             return newTags;
+        }
+
+        public static CloudTag SetSize(CloudTag tag, Graphics img, int minSize, int maxSize)
+        {
+            var size = (float)(Math.Log(tag.Frequency, 2) + 1);
+            size = size > maxSize ? maxSize : (size < minSize ? minSize : size);
+            size *= 10;
+            return tag.SetSize(img.MeasureString(tag.Word,
+                new Font("Times New Roman", size))).SetFrequency(size);
+
         }
 
         public static List<CloudTag> Shuffle(this List<CloudTag> tags)
         {
             Random rnd = new Random();
             return tags.OrderBy(item => rnd.Next()).ToList();
+        }
+        public static List<CloudTag> Shuffle(this List<CloudTag> tags, int seed)
+        {
+            Random rnd = new Random();
+            return tags.OrderBy(item => rnd.Next(seed)).ToList();
         }
 
         public static List<CloudTag> SetLocatons(this List<CloudTag> tags)
@@ -46,5 +55,9 @@ namespace CloudMaker
             }
             return tags;
         }
+
+        public static List<CloudTag> SetFrequences(this List<string> source) => source.GroupBy(word => word)
+            .OrderByDescending(word => word.Count())
+            .Select(words => new CloudTag(words.First()).SetFrequency(words.Count())).ToList();
     }
 }
