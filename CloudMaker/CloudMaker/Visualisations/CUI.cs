@@ -30,7 +30,8 @@ namespace CloudMaker.Visualisations
         public IVisulisation GetColors(out Color[] colors)
         {
             Console.WriteLine("Write colors separated with whitespase (if u dont want to set up colors, just set an empty string)");
-            colors = Console.ReadLine().Split(' ').Select(Color.FromName).ToArray();
+            var stringColors = Console.ReadLine();
+            colors = string.IsNullOrWhiteSpace(stringColors) ? null: stringColors.Split(' ').Select(Color.FromName).ToArray();
             return this;
         }
 

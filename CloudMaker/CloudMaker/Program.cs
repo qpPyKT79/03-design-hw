@@ -55,13 +55,11 @@ namespace CloudMaker
         {
             //фильтры и конфигурация на аргументах ком строки
             var inputFilename = string.Empty;
-            var minSize = 0;
-            var maxSize = 0;
+            int minSize;
+            int maxSize;
             Color[] colors;
             UI.GetName(out inputFilename).GetSize(out minSize, out maxSize).GetColors(out colors);
-            var text = Reader.ReadWords(inputFilename, Filters);
-            var cloud = Maker.CreateCloud(text, minSize, maxSize);
-            Writer.WriteTo(cloud);
+            Writer.WriteTo(Maker.CreateCloud(Reader.ReadWords(inputFilename, Filters), minSize, maxSize), colors);
             UI.AllDone();
         }
     }
