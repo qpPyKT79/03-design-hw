@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CloudMaker.Readers
 {
-    public class TxtFileReader :ISourceReader
+    public class ListFileReader :ISourceReader
     {
         public List<string> ReadWords(string sourceName, IFilter[] filters) => 
             File.Exists(sourceName) ? 

@@ -31,31 +31,30 @@ namespace CloudMaker
             Writer = writer;
         }
         
-        static void Main(string[] args)
+        static void Main(string[] argv)
         {
             var kernel = new StandardKernel();
-            var options = new Options();
-            var commandLineArgs = CommandLine.Parser.Default.ParseArguments(args, options);
+            var args = new MainArgs(argv);
+            //var options = new MainArgs();
+            //var commandLineArgs = CommandLine.Parser.Default.ParseArguments(args, options);
             kernel.Bind<ICloudMaker>().To<SimpleCloudMaker>();
             kernel.Bind<IFilter>().To<Normalizer>();
             kernel.Bind<IFilter>().To<BoringWords>();
-            kernel.Bind<ISourceReader>().To<TxtFileReader>();
-            kernel.Bind<ISourceReader>().To<DocFileReader>();
+            kernel.Bind<ISourceReader>().To<ListFileReader>();
             kernel.Bind<IVisulisation>().To<CUI>();
             kernel.Bind<IVisulisation>().To<GUI>();
             kernel.Bind<IWriter>().To<PngWriter>();
             kernel.Bind<IWriter>().To<JpegWriter>();
             new Program(kernel.Get<SimpleCloudMaker>(),
-                new [] {kernel.Get<Normalizer>()}, 
-                kernel.Get<TxtFileReader>(), 
-                kernel.Get<CUI>(), 
-                kernel.Get<PngWriter>() ).Run();
+                args.Filters.Select(filter => (IFilter)kernel.Get(filter)).ToArray(),
+                (ISourceReader)kernel.Get(args.InputFileType), 
+                (IVisulisation)kernel.Get(args.Visualisation),
+                (IWriter)kernel.Get(args.OutputFileType)).Run();
 
         }
 
-        public void Run()
+        private void Run()
         {
-            //фильтры и конфигурация на аргументах ком строки
             var inputFilename = string.Empty;
             int minSize;
             int maxSize;

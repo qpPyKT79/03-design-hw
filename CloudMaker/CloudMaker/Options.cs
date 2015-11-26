@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,35 +8,41 @@ using CloudMaker.Filters;
 using CloudMaker.Readers;
 using CloudMaker.Visualisations;
 using CloudMaker.Writers;
-using CommandLine;
-using CommandLine.Text;
 
 namespace CloudMaker
 {
-    public class Options
+    public class MainArgs
     {
-        public static readonly Dictionary<string, Type> a = new Dictionary<string, Type>
+        public static readonly Dictionary<string, Type> description = new Dictionary<string, Type>
         {
+            {"txt", typeof(ListFileReader) },
             {"CUI", typeof (CUI)},
             {"GUI", typeof (GUI)},
             {"png", typeof (PngWriter)},
             {"jpeg", typeof (JpegWriter)},
             {"normalizer", typeof(Normalizer)},
-            {"boringWords", typeof (BoringWords)},
-            {"doc", typeof (DocFileReader)},
-            {"txt", typeof (TxtFileReader)}
+            {"boringWords", typeof (BoringWords)}
         };
+        public Type InputFileType { get; set; }
+        public Type Visualisation { get; set; }
+        public Type OutputFileType { get; set ; }
+        public List<Type> Filters { get; set; }
 
-        [Option(Required = true, HelpText = "Input filename")]
-        public string InputFileName { get; set; }
+        public MainArgs(string[] args)
+        {
+            if (args.Length<3) errorPrint();
+            InputFileType = description[args[0].Substring(args[0].IndexOf('.')+1)];
+            Visualisation = description[args[1]];
+            OutputFileType = description[args[2]];
+            Filters = new List<Type>();
+            if (args.Length >= 4) Filters.Add(description[args[3]]);
+            if (args.Length == 5) Filters.Add(description[args[4]]);
+        }
 
-        [Option(Required = true, HelpText = "visualisation type: CUI or GUI")]
-        public string Visualisation { get; set; }
-
-        [Option(Required = true, HelpText = "output file type: png or jpeg")]
-        public string OutputFileName { get; set ; }
-
-        [OptionList(Required = true, HelpText = "filters: boringWOrds or/and Normalizer")]
-        public string[] Filters { get; set; }
+        private void errorPrint() => Console.WriteLine("arguments not enough \n " +
+                                                 "unput type (required): list or text \n " +
+                                                 "vusialization type (required): CUI or GUI" +
+                                                 "output type (required): png or jpeg" +
+                                                 "filters (not required): normalizer or/and boringWords");
     }
 }

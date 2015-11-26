@@ -28,8 +28,6 @@ namespace CloudMaker.Writers
         }
         
         private static Color GetRandomColor(Random random, Color[] colors) => 
-            colors == null ?
-            Color.FromArgb(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255)):
-            colors[random.Next()%colors.Length];
+            colors?[random.Next()%colors.Length] ?? Color.FromArgb(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
     }
 }
