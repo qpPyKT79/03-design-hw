@@ -18,7 +18,7 @@ namespace CloudMaker.CloudMaker
         private static List<CloudTag> SetLocatons(List<CloudTag> tags, string packerAlgorithm)
         {
             float maxWidth = tags.Max(tag => tag.TagSize.Width);
-            maxWidth = ((float)Math.Log(tags.Count, 2) + 1) * maxWidth;
+            maxWidth = ((float)Math.Log(tags.Count, 1.4) + 1) * maxWidth;
             var packer = packers[packerAlgorithm]((int)maxWidth, (int)maxWidth);
             for (var i = 0; i < tags.Count; i++)
             {

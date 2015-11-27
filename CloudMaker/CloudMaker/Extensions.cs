@@ -23,7 +23,7 @@ namespace CloudMaker
 
         private static CloudTag SetSize(CloudTag tag, Graphics img, int minSize, int maxSize)
         {
-            var size = (float)(Math.Log(tag.Frequency, 2) + 1);
+            var size = (float)(Math.Log(tag.Frequency, 1.4) + 1);
             size = size > maxSize ? maxSize : (size < minSize ? minSize : size);
             size *= 10;
             return tag.SetSize(img.MeasureString(tag.Word,
