@@ -30,19 +30,41 @@ namespace CloudMaker
 
         public MainArgs(string[] args)
         {
-            if (args.Length<3) errorPrint();
-            InputFileType = description[args[0]];
-            Visualisation = description[args[1]];
-            OutputFileType = description[args[2]];
-            Filters = new List<Type>();
-            if (args.Length >= 4) Filters.Add(description[args[3]]);
-            if (args.Length == 5) Filters.Add(description[args[4]]);
+            try
+            {
+                InputFileType = description[args[0]];
+                Visualisation = description[args[1]];
+                OutputFileType = description[args[2]];
+                Filters = new List<Type>();
+                if (args.Length >= 4) Filters.Add(description[args[3]]);
+                if (args.Length == 5) Filters.Add(description[args[4]]);
+            }
+            catch (KeyNotFoundException error)
+            {
+                IncorrectArgs("Incorrect Arguments");
+                DefaultConfig();
+            }
+            catch (IndexOutOfRangeException error)
+            {
+                IncorrectArgs("arguments not enough");
+                DefaultConfig();
+            }
+            
         }
 
-        private void errorPrint() => Console.WriteLine("arguments not enough \n " +
+        private void DefaultConfig()
+        {
+            InputFileType = description["list"];
+            Visualisation = description["CUI"];
+            OutputFileType = description["png"];
+            Filters = new List<Type>();
+        }
+
+        private void IncorrectArgs(string errorMsg) => Console.WriteLine($"{errorMsg} \n " +
                                                  "unput type (required): list or text \n " +
                                                  "vusialization type (required): CUI or GUI" +
                                                  "output type (required): png or jpeg" +
-                                                 "filters (not required): normalizer or/and boringWords");
+                                                 "filters (not required): normalizer or/and boringWords \n" +
+                                                                         "setting default configuration");
     }
 }
