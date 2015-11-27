@@ -22,11 +22,11 @@ namespace CloudMaker.Visualisations
             minSize = 1;
             maxSize = 25;
             Console.WriteLine();
-            Console.WriteLine("Size is not set or minSize > maxSize");
+            Console.WriteLine("Font size is not set or minSize > maxSize");
             Console.WriteLine("Note! minSIze must be >= 1 and maxSize <= 25");
             Console.WriteLine("Write u min and max size separated with whitespace");
             Console.WriteLine();
-            Console.WriteLine("if u dont want to set up colors, just set an empty string");
+            Console.WriteLine("if u dont want to set up font size, just set an empty string");
             var sizeString = Console.ReadLine();
             var sizeNums = string.IsNullOrEmpty(sizeString) ? null : sizeString.Split(' ').Select(int.Parse).ToArray();
             if (sizeNums?.Length<2)
