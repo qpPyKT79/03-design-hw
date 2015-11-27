@@ -19,7 +19,7 @@ namespace CloudMaker.Writers
             float height;
             tags.GetBounds(out width, out height);
             var random = new Random();
-            using (var image = new Bitmap((int)width+1, (int)width+1))
+            using (var image = new Bitmap((int)width+1, (int)height+1))
             using (var g = Graphics.FromImage(image))
             {
                 foreach (var tag in tags)
