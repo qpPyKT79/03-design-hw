@@ -59,8 +59,9 @@ namespace CloudMaker
             int minSize;
             int maxSize;
             Color[] colors;
-            UI.GetName(out inputFilename).GetSize(out minSize, out maxSize).GetColors(out colors);
-            Writer.WriteTo(Maker.CreateCloud(Reader.ReadWords(inputFilename, Filters), minSize, maxSize), colors);
+            string algorithm;
+            UI.GetName(out inputFilename).GetSize(out minSize, out maxSize).GetColors(out colors).GetCloudMakerAlg(out algorithm);
+            Writer.WriteTo(Maker.CreateCloud(Reader.ReadWords(inputFilename, Filters), algorithm, minSize, maxSize), colors);
             UI.AllDone();
         }
     }

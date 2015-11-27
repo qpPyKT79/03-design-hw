@@ -9,6 +9,6 @@ namespace CloudMaker
 {
     interface ICloudMaker
     {
-        List<CloudTag> CreateCloud(List<string> source, int minSize = 1, int maxSize = 25);
+        List<CloudTag> CreateCloud(List<string> source, string packerAlgorithm, int minSize = 1, int maxSize = 25);
     }
 }

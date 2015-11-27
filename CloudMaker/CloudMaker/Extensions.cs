@@ -50,20 +50,6 @@ namespace CloudMaker
             return tags.OrderBy(item => rnd.Next()).ToList();
         }
 
-        public static List<CloudTag> SetLocatons(this List<CloudTag> tags)
-        {
-            float maxWidth = tags.Max(tag => tag.TagSize.Width);
-            maxWidth = ((float)Math.Log(tags.Count, 2) + 1)*maxWidth;
-            ArevaloRectanglePacker packer = new ArevaloRectanglePacker((int)maxWidth, (int)maxWidth);
-            for (var i = 0; i < tags.Count; i++)
-            {
-                Microsoft.Xna.Framework.Point placement;
-                packer.TryPack((int)tags[i].TagSize.Width, (int)tags[i].TagSize.Height, out placement);
-                tags[i] = tags[i].SetLocation(placement.X, placement.Y);
-            }
-            return tags;
-        }
-
         public static List<CloudTag> SetFrequences(this List<string> source) => source.GroupBy(word => word)
             .OrderByDescending(word => word.Count())
             .Select(words => new CloudTag(words.First()).SetFrequency(words.Count())).ToList();
