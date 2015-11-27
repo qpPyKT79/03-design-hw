@@ -35,11 +35,11 @@ namespace CloudMaker.Visualisations
 
         public IVisulisation GetSize(out int minSize, out int maxSize)
         {
-            minSize = 1;
-            maxSize = 25;
+            minSize = 25;
+            maxSize = 50;
             Console.WriteLine();
             Console.WriteLine("Font size is not set or minSize > maxSize");
-            Console.WriteLine("Note! minSIze must be >= 1 and maxSize <= 25");
+            Console.WriteLine("Note! minSIze must be >= 25 and maxSize <= 50");
             Console.WriteLine("Write u min and max size separated with whitespace");
             Console.WriteLine();
             Console.WriteLine("if u dont want to set up font size, just set an empty string");
@@ -54,7 +54,7 @@ namespace CloudMaker.Visualisations
                 minSize = sizeNums[0];
                 maxSize = sizeNums[1];
             }
-            return minSize>=1 && maxSize<= 25? this : GetSize(out minSize, out maxSize);
+            return minSize>=25 && maxSize<= 50 && minSize!=maxSize? this : GetSize(out minSize, out maxSize);
         }
 
         public IVisulisation GetColors(out Color[] colors)
