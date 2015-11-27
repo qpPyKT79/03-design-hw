@@ -8,7 +8,7 @@ namespace CloudMaker
 {
     public interface IFilter
     {
-        IEnumerable<string> FilterWords(IEnumerable<string> words);
+        List<string> FilterWords(List<string> words);
 
     }
 }

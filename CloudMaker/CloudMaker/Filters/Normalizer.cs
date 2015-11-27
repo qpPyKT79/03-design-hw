@@ -9,9 +9,9 @@ namespace CloudMaker.Filters
 {
     public class Normalizer: IFilter
     {
-        public IEnumerable<string> FilterWords(IEnumerable<string> words) => Normalize(words).Where(word => !string.IsNullOrEmpty(word));
+        public List<string> FilterWords(List<string> words) => Normalize(words).Where(word => !string.IsNullOrEmpty(word)).ToList();
 
-        private List<string> Normalize(IEnumerable<string> words)
+        private List<string> Normalize(List<string> words)
         {
             var newWords = new List<string>();
             using (Hunspell hunspell = new Hunspell("en_us.aff", "en_us.dic"))

@@ -10,7 +10,7 @@ namespace CloudMaker.Filters
     public class BoringWords :IFilter
     {
         private HashSet<string> boringWords { get;} 
-        public IEnumerable<string> FilterWords(IEnumerable<string> words) => words.Where(NotBoring);
+        public List<string> FilterWords(List<string> words) => words.Where(NotBoring).ToList();
 
         public BoringWords()
         {
