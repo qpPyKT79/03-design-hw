@@ -15,9 +15,9 @@ namespace CloudMaker.Writers
         public void WriteTo(List<CloudTag> tags, Color[] colors = null)
         {
             string outputSourceName = "out.png";
-            //float maxWidth = tags.Max(tag => tag.TagSize.Width);
-            //maxWidth = ((float)Math.Log(tags.Count, 2) + 1) * maxWidth;
-            var width = GetMaxWidth(tags);
+            float width;
+            float height;
+            tags.GetBounds(out width, out height);
             var random = new Random();
             using (var image = new Bitmap((int)width+1, (int)width+1))
             using (var g = Graphics.FromImage(image))
@@ -27,16 +27,6 @@ namespace CloudMaker.Writers
                         new SolidBrush(GetRandomColor(random, colors)), tag.X, tag.Y);
                 image.Save(outputSourceName, ImageFormat.Png);
             }
-        }
-
-        private float GetMaxWidth(List<CloudTag> tags)
-        {
-            float maxWidth = 0;
-            foreach (var tag in tags)
-                if (maxWidth <= tag.X + tag.TagSize.Width)
-                        maxWidth = tag.X +(int)tag.TagSize.Width+1;
-            return maxWidth;
-
         }
         
         private static Color GetRandomColor(Random random, Color[] colors) => 

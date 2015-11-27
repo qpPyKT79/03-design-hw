@@ -38,8 +38,11 @@ namespace CloudMaker
 
         public override bool Equals(object obj)
         {
-
-            return base.Equals(obj);
+            CloudTag tagObj = obj as CloudTag;
+            if (tagObj == null)
+                return false;
+            else
+                return Frequency.Equals(tagObj.Frequency) && TagSize.Equals(tagObj.TagSize) && Word.Equals(tagObj.Word); //&& X.Equals(tagObj.X) && Y.Equals(tagObj.Y)
         }
 
         public int CompareTo(object obj)

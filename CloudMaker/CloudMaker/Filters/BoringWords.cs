@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +9,14 @@ namespace CloudMaker.Filters
 {
     public class BoringWords :IFilter
     {
-        public IEnumerable<string> FilterWords(IEnumerable<string> words)
+        private HashSet<string> boringWords { get;} 
+        public IEnumerable<string> FilterWords(IEnumerable<string> words) => words.Where(NotBoring);
+
+        public BoringWords()
         {
-            throw new NotImplementedException();
+            boringWords = new HashSet<string>(File.ReadAllText("BoringWords.txt").Split('\n').Select(word=> word.Replace("\r", "")));
         }
+
+        private bool NotBoring(string word) => !boringWords.Contains(word);
     }
 }
