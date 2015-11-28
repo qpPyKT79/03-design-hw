@@ -17,7 +17,7 @@ namespace CloudMaker
         private IVisulisation UI { get; }
         private IWriter Writer { get; }
 
-        public Program(ICloudMaker maker, IFilter[] filters, ISourceReader reader, IVisulisation ui, IWriter writer)
+        private Program(ICloudMaker maker, IFilter[] filters, ISourceReader reader, IVisulisation ui, IWriter writer)
         {
             Maker = maker;
             Filters = filters;
@@ -47,15 +47,10 @@ namespace CloudMaker
 
         private void Run()
         {
-            var inputFilename = string.Empty;
-            int minSize;
-            int maxSize;
-            Color[] colors;
-            AlgName algorithm;
-            UI.GetName(out inputFilename).GetSize(out minSize, out maxSize).GetColors(out colors).GetCloudMakerAlg(out algorithm);
-            var input = Reader.ReadWords(inputFilename, Filters);
-            if (input.Count >0)
-                Writer.WriteTo(Maker.CreateCloud(input, algorithm, minSize, maxSize), colors);
+            var inputText = Reader.ReadWords(UI.GetName(), Filters);
+            var size = UI.GetSize();
+            if (inputText.Count >0)
+                Writer.WriteTo(Maker.CreateCloud(inputText, UI.GetCloudMakerAlg(), size.Item1, size.Item2), UI.GetColors());
             UI.AllDone();
         }
     }

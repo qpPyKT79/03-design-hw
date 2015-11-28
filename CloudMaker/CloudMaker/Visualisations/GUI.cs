@@ -5,27 +5,27 @@ namespace CloudMaker.Visualisations
 {
     public class GUI : IVisulisation
     {
-        public IVisulisation GetCloudMakerAlg(out AlgName cloudMakerAlg)
+        public AlgName GetCloudMakerAlg()
         {
             throw new NotImplementedException();
         }
 
-        public IVisulisation GetName(out string sourceName)
+        public string GetName()
         {
             throw new NotImplementedException();
         }
 
-        public IVisulisation GetSize(out int minSize, out int maxSize)
+        public Tuple<int, int> GetSize()
         {
             throw new NotImplementedException();
         }
 
-        public IVisulisation GetColors(out Color[] colors)
+        public Color[] GetColors()
         {
             throw new NotImplementedException();
         }
 
-        public IVisulisation AllDone()
+        public void AllDone()
         {
             throw new NotImplementedException();
         }

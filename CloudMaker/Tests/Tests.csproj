@@ -41,6 +41,10 @@
       <HintPath>..\packages\FakeItEasy.1.25.3\lib\net40\FakeItEasy.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Moq, Version=4.2.1510.2205, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
       <Private>True</Private>
@@ -60,6 +64,7 @@
     <Compile Include="BoringWordsTest.cs" />
     <Compile Include="CloudTagTest.cs" />
     <Compile Include="ExtensionsTest.cs" />
+    <Compile Include="HardTest.cs" />
     <Compile Include="ListFileReaderTest.cs" />
     <Compile Include="NormalizerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

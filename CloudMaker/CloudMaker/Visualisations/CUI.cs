@@ -14,8 +14,9 @@ namespace CloudMaker.Visualisations
     public class CUI : IVisulisation
     {
         private static readonly HashSet<string> Algs = new HashSet<string> {"arevalo", "simple"} ;
-        public IVisulisation GetCloudMakerAlg(out AlgName cloudMakerAlg)
+        public AlgName GetCloudMakerAlg()
         {
+            AlgName cloudMakerAlg;
             Console.WriteLine();
             Console.WriteLine("Set algorithm of making cloud, members are:");
             Console.WriteLine(string.Join(" ", Algs));
@@ -23,21 +24,20 @@ namespace CloudMaker.Visualisations
             Console.WriteLine("if u dont want to set up this field. just set an empty string");
             var inputString = Console.ReadLine();
             Enum.TryParse(inputString, out cloudMakerAlg);
-            return this;
+            return cloudMakerAlg;
 
         }
 
-        public IVisulisation GetName(out string sourceName)
+        public string GetName()
         {
             Console.WriteLine("Plese type Filename");
-            sourceName = Console.ReadLine();
-            return this;
+            return Console.ReadLine();
         }
 
-        public IVisulisation GetSize(out int minSize, out int maxSize)
+        public Tuple<int,int> GetSize()
         {
-            minSize = 5;
-            maxSize = 25;
+            var minSize = 5;
+            var maxSize = 25;
             Console.WriteLine();
             Console.WriteLine("Font size is not set or minSize > maxSize");
             Console.WriteLine("Note! minSIze must be >= 5 and maxSize <= 25");
@@ -47,30 +47,25 @@ namespace CloudMaker.Visualisations
             var sizeString = Console.ReadLine();
             var sizeNums = string.IsNullOrEmpty(sizeString) ? null : sizeString.Split(' ').Select(int.Parse).ToArray();
             if (sizeNums?.Length<2)
-                GetSize(out minSize, out maxSize);
+                GetSize();
             else
             {
                 if (sizeNums == null)
-                    return this;
+                    return new Tuple<int, int>(5,25);
                 minSize = sizeNums[0];
                 maxSize = sizeNums[1];
             }
-            return minSize>=5 && maxSize<= 25 && minSize!=maxSize? this : GetSize(out minSize, out maxSize);
+            return minSize>=5 && maxSize<= 25 && minSize!=maxSize? new Tuple<int, int>(minSize,maxSize) : GetSize();
         }
 
-        public IVisulisation GetColors(out Color[] colors)
+        public Color[] GetColors()
         {
             Console.WriteLine();
             Console.WriteLine("Write colors separated with whitespase (if u dont want to set up colors, just set an empty string)");
             var stringColors = Console.ReadLine();
-            colors = string.IsNullOrWhiteSpace(stringColors) ? null: stringColors.Split(' ').Select(Color.FromName).ToArray();
-            return this;
+            return string.IsNullOrWhiteSpace(stringColors) ? null: stringColors.Split(' ').Select(Color.FromName).ToArray();
         }
 
-        public IVisulisation AllDone()
-        {
-            Console.WriteLine("Done!");
-            return this;
-        }
+        public void AllDone() => Console.WriteLine("Done!");
     }
 }

@@ -2,7 +2,7 @@
 
 namespace CloudMaker
 {
-    interface ISourceReader
+    public interface ISourceReader
     {
         List<string> ReadWords(string sourceName, IFilter[] filters);
     }
