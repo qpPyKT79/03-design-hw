@@ -10,7 +10,7 @@ namespace CloudMaker.SourceReaders
         [Test]
         public static void ReadFromFileTest()
         {
-            var actual = ListFileReader.GetTextFromFile("Test.txt");
+            var actual = GetTextFromFile("Test.txt");
             var excepted = new List<string>
             {
                 "this",
@@ -36,7 +36,7 @@ namespace CloudMaker.SourceReaders
         [Test]
         public static void ReadFromFileTest_UnexistableFile()
         {
-            var actual = ListFileReader.GetTextFromFile("UnexistbleFile.UnexistableExtension");
+            var actual = GetTextFromFile("UnexistbleFile.UnexistableExtension");
             var excepted = new List<string>();
             CollectionAssert.AreEqual(excepted, actual);
         }
