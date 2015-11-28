@@ -9,7 +9,7 @@ namespace CloudMaker.Visualisations
 {
     public class GUI : IVisulisation
     {
-        public IVisulisation GetCloudMakerAlg(out string cloudMakerAlg)
+        public IVisulisation GetCloudMakerAlg(out AlgName cloudMakerAlg)
         {
             throw new NotImplementedException();
         }

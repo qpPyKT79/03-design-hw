@@ -8,20 +8,25 @@ using System.Threading.Tasks;
 
 namespace CloudMaker.Visualisations
 {
+    public enum AlgName
+    {
+        arevalo,
+        simple
+    }
+
     public class CUI : IVisulisation
     {
         private static HashSet<string> algs = new HashSet<string> {"arevalo", "simple"} ;
-        public IVisulisation GetCloudMakerAlg(out string cloudMakerAlg)
+        public IVisulisation GetCloudMakerAlg(out AlgName cloudMakerAlg)
         {
-            cloudMakerAlg = "arevalo";
+            cloudMakerAlg = AlgName.arevalo;
             Console.WriteLine();
             Console.WriteLine("Set algorithm of making cloud, members are:");
             Console.WriteLine(string.Join(" ",algs));
             Console.WriteLine();
             Console.WriteLine("if u dont want to set up this field. just set an empty string");
             var inputString = Console.ReadLine();
-            if (algs.Contains(inputString))
-                cloudMakerAlg = inputString;
+            AlgName.TryParse(inputString, out cloudMakerAlg);
             return this;
 
         }

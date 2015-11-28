@@ -1,32 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CloudMaker.Visualisations;
 using Nuclex.Game.Packing;
 
 namespace CloudMaker.CloudMaker
 {
     public class SimpleCloudMaker :ICloudMaker
     {
-        private static readonly Dictionary<string, Func<int, int, RectanglePacker>> packers = new Dictionary<string, Func<int, int, RectanglePacker>>
+        private static readonly Dictionary<AlgName, Func<int, int, RectanglePacker>> packers = new Dictionary<AlgName, Func<int, int, RectanglePacker>>
         {
-            {"simple", (width, height) => new SimpleRectanglePacker(width, height) },
-            {"arevalo", (width, height) => new ArevaloRectanglePacker(width, height) }
+            {AlgName.simple, (width, height) => new SimpleRectanglePacker(width, height) },
+            {AlgName.arevalo, (width, height) => new ArevaloRectanglePacker(width, height) }
         };  
-        public List<CloudTag> CreateCloud(List<string> source, string packerAlgorithm, int minSize, int maxSize) =>
+        public List<CloudTag> CreateCloud(List<string> source, AlgName packerAlgorithm, int minSize, int maxSize) =>
             SetLocatons(source.SetFrequences().SetSize(minSize, maxSize), packerAlgorithm).Shuffle();
 
-        private static List<CloudTag> SetLocatons(List<CloudTag> tags, string packerAlgorithm)
+        private static List<CloudTag> SetLocatons(List<CloudTag> tags, AlgName packerAlgorithm)
         {
             float maxWidth = tags.Max(tag => tag.TagSize.Width);
-            maxWidth = (float)tags.Count * maxWidth;
+            maxWidth =(float) Math.Log(tags.Count,2) * maxWidth;
             var packer = packers[packerAlgorithm]((int)maxWidth, (int)maxWidth);
-            for (var i = 0; i < tags.Count; i++)
+            Microsoft.Xna.Framework.Point placement;
+            return tags.Select(tag =>
             {
-                Microsoft.Xna.Framework.Point placement;
-                packer.TryPack((int)tags[i].TagSize.Width, (int)tags[i].TagSize.Height, out placement);
-                tags[i] = tags[i].SetLocation(placement.X, placement.Y);
-            }
-            return tags;
+                placement = packer.Pack((int) tag.TagSize.Width, (int) tag.TagSize.Height);
+                return tag.SetLocation(placement.X, placement.Y);
+            }).ToList();
         }
     }
 }

@@ -42,7 +42,7 @@ namespace CloudMaker
             if (tagObj == null)
                 return false;
             else
-                return Frequency.Equals(tagObj.Frequency) && TagSize.Equals(tagObj.TagSize) && Word.Equals(tagObj.Word); //&& X.Equals(tagObj.X) && Y.Equals(tagObj.Y)
+                return Frequency.Equals(tagObj.Frequency) && TagSize.Equals(tagObj.TagSize) && Word.Equals(tagObj.Word);
         }
 
         public int CompareTo(object obj)
