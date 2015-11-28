@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CloudMaker.Visualisations
 {
@@ -16,17 +13,16 @@ namespace CloudMaker.Visualisations
 
     public class CUI : IVisulisation
     {
-        private static HashSet<string> algs = new HashSet<string> {"arevalo", "simple"} ;
+        private static readonly HashSet<string> Algs = new HashSet<string> {"arevalo", "simple"} ;
         public IVisulisation GetCloudMakerAlg(out AlgName cloudMakerAlg)
         {
-            cloudMakerAlg = AlgName.arevalo;
             Console.WriteLine();
             Console.WriteLine("Set algorithm of making cloud, members are:");
-            Console.WriteLine(string.Join(" ",algs));
+            Console.WriteLine(string.Join(" ", Algs));
             Console.WriteLine();
             Console.WriteLine("if u dont want to set up this field. just set an empty string");
             var inputString = Console.ReadLine();
-            AlgName.TryParse(inputString, out cloudMakerAlg);
+            Enum.TryParse(inputString, out cloudMakerAlg);
             return this;
 
         }

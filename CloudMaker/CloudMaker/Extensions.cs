@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Schema;
-using Nuclex.Game.Packing;
 
 namespace CloudMaker
 {
@@ -23,19 +19,9 @@ namespace CloudMaker
             return newTags;
         }
 
-        private static CloudTag SetSize(CloudTag tag, Graphics img, int minSize, int maxSize)
-        {
-            var size = (float)(Math.Log(tag.Frequency, 1.3) + 1);
-            size = size > maxSize ? maxSize : (size < minSize ? minSize : size);
-            size *= 10;
-            return tag.SetSize(img.MeasureString(tag.Word,
-                new Font("Times New Roman", size))).SetFrequency(size);
-        }
-
         private static CloudTag SetSize(CloudTag tag, Graphics img, int minSize, int maxSize, int minFreq, int maxFreq)
         {
             var size = tag.Frequency>minFreq? (maxSize*(tag.Frequency-minFreq))/(maxFreq-minFreq)+minSize:minSize;
-            //size = size > maxSize ? maxSize : (size < minSize ? minSize : size);
             size *= 10;
             return tag.SetSize(img.MeasureString(tag.Word,
                 new Font("Times New Roman", size))).SetFrequency(size);
@@ -57,7 +43,7 @@ namespace CloudMaker
 
         public static List<CloudTag> Shuffle(this List<CloudTag> tags)
         {
-            Random rnd = new Random();
+            var rnd = new Random();
             return tags.OrderBy(item => rnd.Next()).ToList();
         }
 

@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using CloudMaker.CloudMaker;
 using CloudMaker.Filters;
-using CloudMaker.Readers;
 using CloudMaker.Visualisations;
 using CloudMaker.Writers;
 using System.Drawing;
-using NHunspell;
+using CloudMaker.SourceReaders;
 using Ninject;
 
 namespace CloudMaker
@@ -48,7 +43,6 @@ namespace CloudMaker
                 (ISourceReader)kernel.Get(args.InputFileType), 
                 (IVisulisation)kernel.Get(args.Visualisation),
                 (IWriter)kernel.Get(args.OutputFileType)).Run();
-
         }
 
         private void Run()

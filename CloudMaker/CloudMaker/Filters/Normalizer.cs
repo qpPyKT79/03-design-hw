@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NHunspell;
 
 namespace CloudMaker.Filters
@@ -11,7 +8,7 @@ namespace CloudMaker.Filters
     {
         public List<string> FilterWords(List<string> words) => Normalize(words).Where(word => !string.IsNullOrEmpty(word)).ToList();
 
-        private List<string> Normalize(List<string> words)
+        private static List<string> Normalize(List<string> words)
         {
             var newWords = new List<string>();
             using (Hunspell hunspell = new Hunspell("en_us.aff", "en_us.dic"))
