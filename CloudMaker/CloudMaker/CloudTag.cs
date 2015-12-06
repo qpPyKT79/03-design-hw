@@ -9,7 +9,6 @@ namespace CloudMaker
         public float Frequency { get; }
         public float X { get; }
         public float Y { get; }
-
         public string Word { get; }
 
         private CloudTag(SizeF size, float frequency, string word, float x, float y)

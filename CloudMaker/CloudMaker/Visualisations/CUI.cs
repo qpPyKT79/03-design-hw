@@ -11,7 +11,7 @@ namespace CloudMaker.Visualisations
         simple
     }
 
-    public class CUI : IVisulisation
+    public class CUI
     {
         private static readonly HashSet<string> Algs = new HashSet<string> {"arevalo", "simple"} ;
         public AlgName GetCloudMakerAlg()
@@ -20,12 +20,10 @@ namespace CloudMaker.Visualisations
             Console.WriteLine();
             Console.WriteLine("Set algorithm of making cloud, members are:");
             Console.WriteLine(string.Join(" ", Algs));
-            Console.WriteLine();
             Console.WriteLine("if u dont want to set up this field. just set an empty string");
             var inputString = Console.ReadLine();
             Enum.TryParse(inputString, out cloudMakerAlg);
             return cloudMakerAlg;
-
         }
 
         public string GetName()
@@ -65,7 +63,9 @@ namespace CloudMaker.Visualisations
             var stringColors = Console.ReadLine();
             return string.IsNullOrWhiteSpace(stringColors) ? null: stringColors.Split(' ').Select(Color.FromName).ToArray();
         }
-
         public void AllDone() => Console.WriteLine("Done!");
+
+        public Settings GetSettings() => new Settings(GetSize,GetCloudMakerAlg, GetName,GetColors);
+        
     }
 }

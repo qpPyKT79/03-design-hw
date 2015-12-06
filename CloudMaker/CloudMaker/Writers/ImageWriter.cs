@@ -5,13 +5,14 @@ using System.Drawing.Imaging;
 
 namespace CloudMaker.Writers
 {
-    class PngWriter :IWriter
+    public class ImageWriter
     {
-        public void WriteTo(List<CloudTag> tags, Color[] colors = null)
+        public void WriteTo(List<CloudTag> tags, Func<Color[]> getColors, ImageFormat format)
         {
             string outputSourceName = "out.png";
             float width;
             float height;
+            var colors = getColors();
             tags.GetBounds(out width, out height);
             var random = new Random();
             using (var image = new Bitmap((int)width+1, (int)height+1))
@@ -20,7 +21,7 @@ namespace CloudMaker.Writers
                 foreach (var tag in tags)
                     g.DrawString(tag.Word, new Font("Times New Roman", tag.Frequency),
                         new SolidBrush(GetRandomColor(random, colors)), tag.X, tag.Y);
-                image.Save(outputSourceName, ImageFormat.Png);
+                image.Save(outputSourceName, format);
             }
         }
         

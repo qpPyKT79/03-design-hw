@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace CloudMaker.Visualisations
 {
-    public class GUI : IVisulisation
+    public class GUI
     {
         public AlgName GetCloudMakerAlg()
         {
@@ -29,5 +29,6 @@ namespace CloudMaker.Visualisations
         {
             throw new NotImplementedException();
         }
+        public Settings GetSettings() => new Settings(GetSize, GetCloudMakerAlg, GetName, GetColors);
     }
 }

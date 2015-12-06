@@ -14,17 +14,17 @@ namespace Tests
     [TestFixture]
     class HardTest
     {
-        private ISourceReader fakeReader { get; set; }
-        private ICloudMaker fakeClouder { get; set; }
-        [SetUp]
-        public void SetUp()
-        {
-            fakeReader = A.Fake<ISourceReader>();
-            fakeClouder = A.Fake<ICloudMaker>();
-            var temp = string.Empty;
-            A.CallTo(() => fakeReader.ReadWords(temp, new IFilter[0])).Returns(new List<string>() {"a", "b"});
-
-        }
+        //private ISourceReader fakeReader { get; set; }
+        //private ICloudMaker fakeClouder { get; set; }
+        //[SetUp]
+        //public void SetUp()
+        //{
+        //    fakeReader = A.Fake<ISourceReader>();
+        //    fakeClouder = A.Fake<ICloudMaker>();
+        //    var temp = string.Empty;
+        //    A.CallTo(() => fakeReader.ReadWords(temp, new IFilter[0])).Returns(new List<string>() {"a", "b"});
+        //
+        //}
 
     }
 }

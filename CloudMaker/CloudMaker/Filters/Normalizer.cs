@@ -4,11 +4,11 @@ using NHunspell;
 
 namespace CloudMaker.Filters
 {
-    public class Normalizer: IFilter
+    public class Normalizer
     {
         public List<string> FilterWords(List<string> words) => Normalize(words).Where(word => !string.IsNullOrEmpty(word)).ToList();
 
-        private static List<string> Normalize(List<string> words)
+        private List<string> Normalize(List<string> words)
         {
             var newWords = new List<string>();
             using (Hunspell hunspell = new Hunspell("en_us.aff", "en_us.dic"))
