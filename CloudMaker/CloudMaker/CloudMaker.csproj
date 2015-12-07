@@ -82,8 +82,6 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Filters\BoringWordsFilter.cs" />
     <Compile Include="Filters\Normalizer.cs" />
-    <Compile Include="Interfaces\IFileReader.cs" />
-    <Compile Include="Interfaces\IFileWriter.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

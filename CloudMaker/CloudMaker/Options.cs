@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Design;
 using System.Drawing.Imaging;
 using CloudMaker.Filters;
-using CloudMaker.Interfaces;
 using CloudMaker.SourceReaders;
 using CloudMaker.Visualisations;
 using CloudMaker.Writers;

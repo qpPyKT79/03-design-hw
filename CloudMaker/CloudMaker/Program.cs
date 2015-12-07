@@ -1,12 +1,4 @@
-﻿using System.ComponentModel.Design;
-using System.Linq;
-using CloudMaker.CloudMaker;
-using CloudMaker.Filters;
-using CloudMaker.Visualisations;
-using CloudMaker.Writers;
-using System.Drawing;
-using System.Runtime.InteropServices;
-using CloudMaker.SourceReaders;
+﻿using CloudMaker.SourceReaders;
 
 namespace CloudMaker
 {

@@ -13,7 +13,8 @@ namespace CloudMaker.CloudMaker
         {
             {AlgName.simple, (width, height) => new SimpleRectanglePacker(width, height) },
             {AlgName.arevalo, (width, height) => new ArevaloRectanglePacker(width, height) }
-        };  
+        };
+          
         public List<CloudTag> CreateCloud(List<string> source, AlgName packerAlgorithm, int minSize, int maxSize) =>
             SetLocatons(source.SetFrequences().SetSize(minSize, maxSize), packerAlgorithm).Shuffle();
 
