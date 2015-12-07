@@ -65,7 +65,7 @@ namespace CloudMaker.Visualisations
         }
         public void AllDone() => Console.WriteLine("Done!");
 
-        public Settings GetSettings() => new Settings(GetSize,GetCloudMakerAlg, GetName,GetColors);
+        public Settings GetSettings() => new Settings(GetName(), GetCloudMakerAlg(), GetSize(), GetColors());
         
     }
 }

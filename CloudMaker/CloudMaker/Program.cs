@@ -15,13 +15,14 @@ namespace CloudMaker
         static void Main(string[] argv)
         {
             var options = new Options(argv);
+            var uiSettings = options.VisualisationType();
             var inputText = new FilteringFileReader().FilterInputData(
                 options.FileReaderFunc,
                 options.FilterFuncs.ToArray(),
-                options.VisualisationType.GetName);
-            var fontSize = options.VisualisationType.GetSize();
-            var cloud = new CloudMaker.CloudMaker().CreateCloud(inputText, options.VisualisationType.GetAlg(),fontSize.Item1,fontSize.Item2);
-            options.WriteFunc(cloud, options.VisualisationType.GetColors);
+                uiSettings.Filename);
+            var fontSize = uiSettings.FontSize;
+            var cloud = new CloudMaker.CloudMaker().CreateCloud(inputText, uiSettings.Alg, fontSize.Item1, fontSize.Item2);
+            options.WriteFunc(cloud, uiSettings.Colors);
 
         }
 

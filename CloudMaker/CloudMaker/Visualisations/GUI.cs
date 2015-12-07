@@ -29,6 +29,6 @@ namespace CloudMaker.Visualisations
         {
             throw new NotImplementedException();
         }
-        public Settings GetSettings() => new Settings(GetSize, GetCloudMakerAlg, GetName, GetColors);
+        public Settings GetSettings() => new Settings(GetName(), GetCloudMakerAlg(), GetSize(), GetColors());
     }
 }

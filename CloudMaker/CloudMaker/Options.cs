@@ -13,36 +13,37 @@ namespace CloudMaker
 {
     public class Options
     {
-        public static readonly Dictionary<string, Func<Func<string>, List<string>>> ReadFileMethod = new Dictionary
-            <string, Func<Func<string>, List<string>>>
+        private static readonly Dictionary<string, Func<string, List<string>>> ReadFileMethod = new Dictionary
+            <string, Func<string, List<string>>>
         {
-            {"list", (getSourceName) => new FileReader().ReadFromFile(getSourceName)}
-        };
-        public static readonly Dictionary<string, Settings> UiType = new Dictionary<string, Settings>
-        {
-            {"CUI", new CUI().GetSettings()},
-            {"GUI", new GUI().GetSettings()}
+            {"list", (sourceName) => new FileReader().ReadFromFile(sourceName)},
+            {"text", (sourceName) => new TextReader().ReadFromFile(sourceName)}
         };
 
-        public static readonly Dictionary<string, Action<List<CloudTag>, Func<Color[]>>> WriterType = new Dictionary
-            <string, Action<List<CloudTag>, Func<Color[]>>>
+        private static readonly Dictionary<string, Func<Settings>> UiType = new Dictionary<string, Func<Settings>>
+        {
+            {"CUI", () => new CUI().GetSettings()},
+            {"GUI", () => new GUI().GetSettings()}
+        };
+
+        private static readonly Dictionary<string, Action<List<CloudTag>, Color[]>> WriterType = new Dictionary
+            <string, Action<List<CloudTag>, Color[]>>
         {
             {"png", (tags, colors) => new ImageWriter().WriteTo(tags, colors, ImageFormat.Png)},
             {"jpeg", (tags, colors) => new ImageWriter().WriteTo(tags, colors, ImageFormat.Jpeg)}
         };
 
-        public static readonly Dictionary<string, Func<List<string>, List<string>>> FilterTypes = new Dictionary
+        private static readonly Dictionary<string, Func<List<string>, List<string>>> FilterTypes = new Dictionary
             <string, Func<List<string>, List<string>>>
         {
              {"normalizer", (words) => new Normalizer().FilterWords(words)},
              {"boringWords", (words) => new BoringWordsFilter().FilterWords(words)}
         };
         
-        public Func<Func<string>, List<string>> FileReaderFunc { get;}
-        public Settings VisualisationType { get;}
-        public Action<List<CloudTag>, Func<Color[]>> WriteFunc { get;}
+        public Func<string, List<string>> FileReaderFunc { get;}
+        public Func<Settings> VisualisationType { get;}
+        public Action<List<CloudTag>, Color[]> WriteFunc { get;}
         public List<Func<List<string>, List<string>>> FilterFuncs { get; }
-        //public List<Type> FilterTypes { get; set; }
 
         public Options(string[] args)
         {

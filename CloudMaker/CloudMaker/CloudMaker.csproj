@@ -90,6 +90,7 @@
     <Compile Include="Settings.cs" />
     <Compile Include="SourceReaders\FileReader.cs" />
     <Compile Include="SourceReaders\FilteringFileReader.cs" />
+    <Compile Include="SourceReaders\TextReader.cs" />
     <Compile Include="Visualisations\CUI.cs" />
     <Compile Include="Visualisations\GUI.cs" />
     <Compile Include="Writers\ImageWriter.cs" />

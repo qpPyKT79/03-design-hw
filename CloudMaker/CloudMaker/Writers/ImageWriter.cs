@@ -7,12 +7,11 @@ namespace CloudMaker.Writers
 {
     public class ImageWriter
     {
-        public void WriteTo(List<CloudTag> tags, Func<Color[]> getColors, ImageFormat format)
+        public void WriteTo(List<CloudTag> tags, Color[] colors, ImageFormat format)
         {
             string outputSourceName = "out.png";
             float width;
             float height;
-            var colors = getColors();
             tags.GetBounds(out width, out height);
             var random = new Random();
             using (var image = new Bitmap((int)width+1, (int)height+1))
