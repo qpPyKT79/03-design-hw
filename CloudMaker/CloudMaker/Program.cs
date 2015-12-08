@@ -8,9 +8,9 @@ namespace CloudMaker
         {
             var options = new Options(argv);
             var uiSettings = options.VisualisationType();
-            var inputText = new FilteringFileReader().FilterInputData(
+            var inputText = new FilteringFileReader().FilterInputData( // мне кажется что название ReadAndFilterData точнее бы отражало действие функции
                 options.FileReaderFunc,
-                options.FilterFuncs.ToArray(),
+                options.FilterFuncs.ToArray(), //можно тип аргумента сделать IEnumerable и тогда не придется писать .ToArray() 
                 uiSettings.Filename);
             var fontSize = uiSettings.FontSize;
             var cloud = new CloudMaker.CloudMaker().CreateCloud(inputText, uiSettings.Alg, fontSize.Item1, fontSize.Item2);

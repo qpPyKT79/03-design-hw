@@ -15,8 +15,13 @@ namespace CloudMaker.CloudMaker
             {AlgName.arevalo, (width, height) => new ArevaloRectanglePacker(width, height) }
         };
           
+        // предлагаю сразу объединить аргументы minSize и maxSize в какие нибудь ViewOptions
+        // а то вдруг появятся averageSize и прочие опции 
+
+        // может быть еще packers тоже положить в опции и передавать сюда сам алгоритм а не его имя.  
         public List<CloudTag> CreateCloud(List<string> source, AlgName packerAlgorithm, int minSize, int maxSize) =>
-            SetLocatons(source.SetFrequences().SetSize(minSize, maxSize), packerAlgorithm).Shuffle();
+            SetLocatons(source.SetFrequences().SetSize(minSize, maxSize), packerAlgorithm).Shuffle(); 
+        // непонятно зачем shuffle
 
         private List<CloudTag> SetLocatons(List<CloudTag> tags, AlgName packerAlgorithm)
         {
