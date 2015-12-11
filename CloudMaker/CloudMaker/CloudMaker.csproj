@@ -82,7 +82,6 @@
     <Compile Include="CloudTag.cs" />
     <Compile Include="Extensions\BoundsSetter.cs" />
     <Compile Include="Extensions\FrequenciesSetter.cs" />
-    <Compile Include="Temp.cs" />
     <Compile Include="Extensions\SizeSetter.cs" />
     <Compile Include="Filters\BoringWordsFilter.cs" />
     <Compile Include="Filters\Normalizer.cs" />
