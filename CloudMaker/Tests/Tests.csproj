@@ -61,10 +61,11 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="ExtensionsTests\BoundsGetterTest.cs" />
+    <Compile Include="ExtensionsTests\FrequenciesSetterTest.cs" />
+    <Compile Include="ExtensionsTests\SizeSetterTest.cs" />
     <Compile Include="FiltersTests\BoringWordsTest.cs" />
     <Compile Include="CloudTagTest.cs" />
-    <Compile Include="ExtensionsTest.cs" />
-    <Compile Include="HardTest.cs" />
     <Compile Include="ReaderTests\FiltersTest.cs" />
     <Compile Include="ReaderTests\ListFileReaderTest.cs" />
     <Compile Include="FiltersTests\NormalizerTest.cs" />

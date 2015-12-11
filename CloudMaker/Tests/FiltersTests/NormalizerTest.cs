@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using CloudMaker.Filters;
 using NUnit.Framework;
 
-namespace CloudMaker.Filters
+namespace Tests.FiltersTests
 {
     [TestFixture]
     class NormalizerTest

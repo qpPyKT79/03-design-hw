@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using CloudMaker.SourceReaders;
 using NUnit.Framework;
 
-namespace CloudMaker.SourceReaders
+namespace Tests.ReaderTests
 {
     [TestFixture]
     public class ListFileReaderTest

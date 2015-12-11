@@ -2,7 +2,7 @@
 using CloudMaker.Filters;
 using NUnit.Framework;
 
-namespace Tests
+namespace Tests.FiltersTests
 {
     [TestFixture]
     public class BoringWordsTest
