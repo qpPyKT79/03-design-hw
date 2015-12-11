@@ -11,7 +11,7 @@ namespace CloudMaker.Filters
 
         public BoringWordsFilter()
         {
-            boringWords = new HashSet<string>(File.ReadAllText("BoringWordsFilter.txt").Split('\n').Select(word=> word.Replace("\r", "")));
+            boringWords = new HashSet<string>(File.ReadAllText("BoringWords.txt").Split('\n').Select(word=> word.Replace("\r", "")));
         }
 
         private bool NotBoring(string word) => !boringWords.Contains(word);
