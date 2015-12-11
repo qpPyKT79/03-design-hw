@@ -6,42 +6,43 @@ namespace CloudMaker.Filters
     [TestFixture]
     class NormalizerTest
     {
+        private Normalizer sut;
+
+        [SetUp]
+        public void SetUp() => sut = new Normalizer();
+
         [Test]
-        public static void NormalizeWordTest()
+        public void NormalizeWordTest()
         {
             var testWords = new List<string> { "counting","thinks" };
-            var filter = new Normalizer();
-            var actual = filter.FilterWords(testWords);
+            var actual = sut.FilterWords(testWords);
             var excepted = new List<string> {"count","think"};
             CollectionAssert.AreEqual(excepted, actual);
         }
+
         [Test]
-        public static void NormalizeWord_NothingNormilize()
+        public void NormalizeWord_NothingNormilize()
         {
             var testWords = new List<string> {"computer", "fruit", "number" };
-            var filter = new Normalizer();
-            var actual = filter.FilterWords(testWords);
+            var actual = sut.FilterWords(testWords);
             var excepted = new List<string> { "computer", "fruit", "number"};
             CollectionAssert.AreEqual(excepted, actual);
         }
 
         [Test]
-        public static void NormalizeWord_EmptyInput()
+        public void NormalizeWord_EmptyInput()
         {
             var testWords = new List<string>();
-            var filter = new Normalizer();
-            var actual = filter.FilterWords(testWords);
-            var excepted = new List<string>();
-            CollectionAssert.AreEqual(excepted, actual);
+            var actual = sut.FilterWords(testWords);
+            CollectionAssert.IsEmpty(actual);
         }
+
         [Test]
-        public static void NormalizeWord_UnexistingWords()
+        public void NormalizeWord_UnexistingWords()
         {
             var testWords = new List<string> {"sffwfsfsfsfsdeggrftgr", "ThisWordIsNotExist"};
-            var filter = new Normalizer();
-            var actual = filter.FilterWords(testWords);
-            var excepted = new List<string>();
-            CollectionAssert.AreEqual(excepted, actual);
+            var actual = sut.FilterWords(testWords);
+            CollectionAssert.IsEmpty(actual);
         }
     }
 }

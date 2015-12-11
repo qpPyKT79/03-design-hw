@@ -7,30 +7,29 @@ namespace Tests
     [TestFixture]
     public class BoringWordsTest
     {
+        private BoringWordsFilter sut;
+        [SetUp]
+        public void SetUp() => sut = new BoringWordsFilter();
+
         [Test]
-        public static void FilterWordsTest_AllBoring()
+        public void FilterWordsTest_AllBoring()
         {
             var testWords = new List<string> {"of", "as", "the", "versus"};
-            var filter = new BoringWordsFilter();
-            var actual = filter.FilterWords(testWords);
-            var excepted = new List<string>();
-            CollectionAssert.AreEqual(excepted,actual);
+            var actual = sut.FilterWords(testWords);
+            CollectionAssert.IsEmpty(actual);
         }
         [Test]
-        public static void FilterWordsTest_EmptyInput()
+        public void FilterWordsTest_EmptyInput()
         {
             var testWords = new List<string>();
-            var filter = new BoringWordsFilter();
-            var actual = filter.FilterWords(testWords);
-            var excepted = new List<string>();
-            CollectionAssert.AreEqual(excepted, actual);
+            var actual = sut.FilterWords(testWords);
+            CollectionAssert.IsEmpty(actual);
         }
         [Test]
-        public static void FilterWordsTest_FiltringNothing()
+        public void FilterWordsTest_FiltringNothing()
         {
-            var testWords = new List<string> { "NotBoringWord", "NotBoringWordToo" };
-            var filter = new BoringWordsFilter();
-            var actual = filter.FilterWords(testWords);
+            var testWords = new List<string> { "NotBoringWord", "NotBoringWordToo", "of", "the" };
+            var actual = sut.FilterWords(testWords);
             var excepted = new List<string> { "NotBoringWord", "NotBoringWordToo" };
             CollectionAssert.AreEqual(excepted, actual);
         }
