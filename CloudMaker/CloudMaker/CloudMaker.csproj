@@ -90,9 +90,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="SourceReaders\FileReader.cs" />
-    <Compile Include="SourceReaders\FilterInputData.cs" />
-    <Compile Include="SourceReaders\TextReader.cs" />
+    <Compile Include="SourceReaders\ListFileReader.cs" />
+    <Compile Include="SourceReaders\Filter.cs" />
+    <Compile Include="SourceReaders\TextFileReader.cs" />
     <Compile Include="AlgName.cs" />
     <Compile Include="Visualisations\CUI.cs" />
     <Compile Include="Visualisations\GUI.cs" />

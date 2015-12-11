@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace CloudMaker.SourceReaders
 {
-    public class TextReader
+    public class TextFileReader
     {
         private readonly static HashSet<char> Symbols = new HashSet<char>
         {
-            ',','.','!','&','?','\"','\\','/','<','>',':',';','-','+','*','`','^','~','%','#','@','\r'
+            ',','.','!','&','?','\"','\\','/','<','>',':',';','-','+','*','`','^','~','%','#','@','\r', ' '
         }; 
         public List<string> ReadFromFile(string sourceName) =>
             File.Exists(sourceName)

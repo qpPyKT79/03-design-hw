@@ -8,7 +8,7 @@ namespace CloudMaker
         {
             var options = new Options(argv);
             var uiSettings = options.VisualisationType;
-            var inputText = new FilterInputData().ReadAndFilterInputData(
+            var inputText = new Filter().ReadAndFilterInputData(
                 options.FileReaderFunc,
                 options.FilterFuncs,
                 uiSettings.Filename);

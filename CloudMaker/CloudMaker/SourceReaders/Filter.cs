@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CloudMaker.SourceReaders
 {
-    public class FilterInputData
+    public class Filter
     {
         public List<string> ReadAndFilterInputData(
             Func<string, List<string>> readFunc,

@@ -14,8 +14,8 @@ namespace CloudMaker
         private static readonly Dictionary<string, Func<string, List<string>>> ReadFileMethod = new Dictionary
             <string, Func<string, List<string>>>
         {
-            {"list", sourceName => new FileReader().ReadFromFile(sourceName)},
-            {"text", sourceName => new TextReader().ReadFromFile(sourceName)}
+            {"list", sourceName => new ListFileReader().ReadFromFile(sourceName)},
+            {"text", sourceName => new TextFileReader().ReadFromFile(sourceName)}
         };
 
         private static readonly Dictionary<string, Func<Settings>> UiType = new Dictionary<string, Func<Settings>>
