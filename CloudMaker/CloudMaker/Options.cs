@@ -14,8 +14,8 @@ namespace CloudMaker
         private static readonly Dictionary<string, Func<string, List<string>>> ReadFileMethod = new Dictionary
             <string, Func<string, List<string>>>
         {
-            {"list", (sourceName) => new FileReader().ReadFromFile(sourceName)},
-            {"text", (sourceName) => new TextReader().ReadFromFile(sourceName)}
+            {"list", sourceName => new FileReader().ReadFromFile(sourceName)},
+            {"text", sourceName => new TextReader().ReadFromFile(sourceName)}
         };
 
         private static readonly Dictionary<string, Func<Settings>> UiType = new Dictionary<string, Func<Settings>>
@@ -34,24 +34,25 @@ namespace CloudMaker
         private static readonly Dictionary<string, Func<List<string>, List<string>>> FilterTypes = new Dictionary
             <string, Func<List<string>, List<string>>>
         {
-             {"normalizer", (words) => new Normalizer().FilterWords(words)},
-             {"boringWords", (words) => new BoringWordsFilter().FilterWords(words)}
+             {"normalizer", words => new Normalizer().FilterWords(words)},
+             {"boringWords", words => new BoringWordsFilter().FilterWords(words)}
         };
-        
+
+
         public Func<string, List<string>> FileReaderFunc { get;}
-        public Func<Settings> VisualisationType { get;}
+        public Settings VisualisationType { get;}
         public Action<List<CloudTag>, Color[]> WriteFunc { get;}
         public List<Func<List<string>, List<string>>> FilterFuncs { get; }
 
         public Options(string[] args)
         {
-            VisualisationType = UiType["CUI"];
+            var visualisationType = UiType["CUI"];
             FileReaderFunc = ReadFileMethod["list"];
             WriteFunc = WriterType["png"];
             FilterFuncs = new List<Func<List<string>, List<string>>>();
             try
             {
-                VisualisationType = UiType[args[0]];
+                visualisationType = UiType[args[0]];
                 WriteFunc = WriterType[args[2]];
                 FileReaderFunc = ReadFileMethod[args[1]];
                 if (args.Length >= 4) FilterFuncs.Add(FilterTypes[args[3]]);
@@ -64,6 +65,11 @@ namespace CloudMaker
             catch (IndexOutOfRangeException)
             {
                 PrintArgsError("arguments not enough");
+            }
+            finally
+            {
+                VisualisationType = visualisationType();
+
             }
         }
 

@@ -1,20 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
-using CloudMaker.Visualisations;
+using Nuclex.Game.Packing;
 
 namespace CloudMaker
 {
     public class Settings
     {
-        public Tuple<int, int> FontSize { get; }
-        public AlgName Alg { get; }
+        private static readonly Dictionary<AlgName, Func<int, int, RectanglePacker>> Packers = new Dictionary<AlgName, Func<int, int, RectanglePacker>>
+        {
+            {AlgName.simple, (width, height) => new SimpleRectanglePacker(width, height) },
+            {AlgName.arevalo, (width, height) => new ArevaloRectanglePacker(width, height) }
+        };
+        public CloudMakerOptions CloudOptions { get; }
         public string Filename { get; }
         public Color[] Colors { get; }
 
         public Settings(string filename, AlgName alg, Tuple<int, int> fontSize, Color[] colors)
         {
-            FontSize = fontSize;
-            Alg = alg;
+            CloudOptions = new CloudMakerOptions(fontSize.Item1, fontSize.Item2,Packers[alg]);
             Filename = filename;
             Colors = colors;
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using CloudMaker.Extensions;
 
 namespace CloudMaker.Writers
 {
@@ -10,11 +11,9 @@ namespace CloudMaker.Writers
         public void WriteTo(List<CloudTag> tags, Color[] colors, ImageFormat format)
         {
             string outputSourceName = "out.png";
-            float width;
-            float height;
-            tags.GetBounds(out width, out height);
+            var bounds = tags.GetBounds();
             var random = new Random();
-            using (var image = new Bitmap((int)width+1, (int)height+1))
+            using (var image = new Bitmap((int)bounds.Item1+1, (int)bounds.Item2+1))
             using (var g = Graphics.FromImage(image))
             {
                 foreach (var tag in tags)

@@ -5,12 +5,6 @@ using System.Linq;
 
 namespace CloudMaker.Visualisations
 {
-    public enum AlgName
-    {
-        arevalo,
-        simple
-    }
-
     public class CUI
     {
         private static readonly HashSet<string> Algs = new HashSet<string> {"arevalo", "simple"} ;
@@ -63,7 +57,6 @@ namespace CloudMaker.Visualisations
             var stringColors = Console.ReadLine();
             return string.IsNullOrWhiteSpace(stringColors) ? null: stringColors.Split(' ').Select(Color.FromName).ToArray();
         }
-        public void AllDone() => Console.WriteLine("Done!");
 
         public Settings GetSettings() => new Settings(GetName(), GetCloudMakerAlg(), GetSize(), GetColors());
         

@@ -35,6 +35,9 @@ namespace CloudMaker
                 return false;
             return Frequency.Equals(tagObj.Frequency) && TagSize.Equals(tagObj.TagSize) && Word.Equals(tagObj.Word);
         }
+
+        public override int GetHashCode() => (X+Y).GetHashCode()+Word.GetHashCode()+TagSize.GetHashCode()+Frequency.GetHashCode();
+
         public int CompareTo(object obj)
         {
             if (Frequency > ((CloudTag) obj).Frequency) return 1;

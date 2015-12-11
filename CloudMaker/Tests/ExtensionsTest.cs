@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
+﻿/*using System.Collections.Generic;
 using CloudMaker;
+using CloudMaker.Extensions;
 using NUnit.Framework;
 
 namespace Tests
@@ -49,3 +50,4 @@ namespace Tests
         }
     }
 }
+*/
