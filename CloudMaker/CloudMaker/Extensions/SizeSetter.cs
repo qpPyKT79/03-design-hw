@@ -8,6 +8,8 @@ namespace CloudMaker.Extensions
     {
         public static List<CloudTag> SetSize(this List<CloudTag> tags, int minSize, int maxSize)
         {
+            if (tags.Count == 0)
+                return tags;
             int maxFreq = (int)tags.Max(tag => tag.Frequency);
             int minFreq = (int)tags.Min(tag => tag.Frequency);
             var newTags = new List<CloudTag>();

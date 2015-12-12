@@ -23,5 +23,9 @@ namespace Tests.ExtensionsTests
             };
             CollectionAssert.AreEqual(actual, excepted);
         }
+
+        [Test]
+        public static void SetFrequenciesTest_EmptyList()=>
+            CollectionAssert.IsEmpty(new List<string>().SetFrequences());
     }
 }

@@ -18,3 +18,6 @@ namespace CloudMaker
         }
     }
 }
+//todo: CloudMaker
+//todo: Visuaalisators
+//todo: Writers

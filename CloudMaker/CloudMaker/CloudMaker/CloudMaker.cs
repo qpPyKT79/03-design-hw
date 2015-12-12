@@ -26,6 +26,7 @@ namespace CloudMaker.CloudMaker
             }).ToList();
         }
 
+
         public float getMaxWidth(List<CloudTag> tags) => (float)Math.Log(tags.Count, 2) * tags.Max(tag => tag.TagSize.Width);
     }
 }

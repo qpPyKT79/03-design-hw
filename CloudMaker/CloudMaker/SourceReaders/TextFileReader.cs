@@ -8,8 +8,8 @@ namespace CloudMaker.SourceReaders
     {
         private readonly static HashSet<char> Symbols = new HashSet<char>
         {
-            ',','.','!','&','?','\"','\\','/','<','>',':',';','-','+','*','`','^','~','%','#','@','\r', ' '
-        }; 
+            ',','.','!','&','?','\"','\\','/','<','>',':',';','-','+','*','`','^','~','%','#','@','\r',' '
+        };
         public List<string> ReadFromFile(string sourceName) =>
             File.Exists(sourceName)
                 ? File.ReadAllText(sourceName)
