@@ -78,8 +78,8 @@ namespace CloudMaker
         private static void PrintArgsError (string errorMsg) => Console.WriteLine($"{errorMsg} \n " +
                                                    "unput type (required): list or text \n " +
                                                    "vusialization type (required): CUI or GUI" +
-                                                   "output type (required): png or jpeg" +
+                                                   "output type (required): png, jpeg e.t.c." +
                                                    "filters (not required): normalizer or/and boringWords \n" +
-                                                   "setting default configuration");
+                                                   "default configuration will be loaded");
     }
 }
