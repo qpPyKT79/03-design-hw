@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using Nuclex.Game.Packing;
 
 namespace CloudMaker.Visualisations
 {
     public class CUI
     {
         private static readonly HashSet<string> Algs = new HashSet<string> {"arevalo", "simple"} ;
-        public AlgName GetCloudMakerAlg()
+        public Func<int, int, RectanglePacker> GetCloudMakerAlg()
         {
             AlgName cloudMakerAlg;
             Console.WriteLine();
@@ -17,7 +18,7 @@ namespace CloudMaker.Visualisations
             Console.WriteLine("if u dont want to set up this field. just set an empty string");
             var inputString = Console.ReadLine();
             Enum.TryParse(inputString, out cloudMakerAlg);
-            return cloudMakerAlg;
+            return Options.Packers[cloudMakerAlg];
         }
 
         public string GetName()

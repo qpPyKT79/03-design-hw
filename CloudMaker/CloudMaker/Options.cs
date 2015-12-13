@@ -6,6 +6,7 @@ using CloudMaker.Filters;
 using CloudMaker.SourceReaders;
 using CloudMaker.Visualisations;
 using CloudMaker.Writers;
+using Nuclex.Game.Packing;
 
 namespace CloudMaker
 {
@@ -38,21 +39,27 @@ namespace CloudMaker
              {"boringWords", words => new BoringWordsFilter().FilterWords(words)}
         };
 
+        public static readonly Dictionary<AlgName, Func<int, int, RectanglePacker>> Packers = new Dictionary<AlgName, Func<int, int, RectanglePacker>>
+        {
+            {AlgName.simple, (width, height) => new SimpleRectanglePacker(width, height) },
+            {AlgName.arevalo, (width, height) => new ArevaloRectanglePacker(width, height) }
+        };
+
 
         public Func<string, List<string>> FileReaderFunc { get;}
-        public Settings VisualisationType { get;}
+        public Func<Settings> VisualisationType { get;}
         public Action<List<CloudTag>, Color[]> WriteFunc { get;}
         public List<Func<List<string>, List<string>>> FilterFuncs { get; }
 
         public Options(string[] args)
         {
-            var visualisationType = UiType["CUI"];
+            VisualisationType = UiType["CUI"];
             FileReaderFunc = ReadFileMethod["list"];
             WriteFunc = WriterType["png"];
             FilterFuncs = new List<Func<List<string>, List<string>>>();
             try
             {
-                visualisationType = UiType[args[0]];
+                VisualisationType = UiType[args[0]];
                 WriteFunc = WriterType[args[2]];
                 FileReaderFunc = ReadFileMethod[args[1]];
                 if (args.Length >= 4) FilterFuncs.Add(FilterTypes[args[3]]);
@@ -65,11 +72,6 @@ namespace CloudMaker
             catch (IndexOutOfRangeException)
             {
                 PrintArgsError("arguments not enough");
-            }
-            finally
-            {
-                VisualisationType = visualisationType();
-
             }
         }
 

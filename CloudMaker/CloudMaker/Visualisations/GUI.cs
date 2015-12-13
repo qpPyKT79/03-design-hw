@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Drawing;
+using Nuclex.Game.Packing;
 
 namespace CloudMaker.Visualisations
 {
     public class GUI
     {
-        public AlgName GetCloudMakerAlg()
+        public Func<int, int, RectanglePacker> GetCloudMakerAlg()
         {
             throw new NotImplementedException();
         }
